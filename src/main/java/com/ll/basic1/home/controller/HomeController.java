@@ -1,10 +1,6 @@
-package com.ll.basic1.controller;
+package com.ll.basic1.home.controller;
 
 import com.ll.basic1.entity.People;
-import com.ll.basic1.entity.Result;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
