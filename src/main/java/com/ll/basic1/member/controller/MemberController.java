@@ -3,6 +3,7 @@ package com.ll.basic1.member.controller;
 import com.ll.basic1.member.entity.Member;
 import com.ll.basic1.resultData.Result;
 import com.ll.basic1.member.service.MemberService;
+import com.ll.basic1.rq.Rq;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,7 +21,8 @@ public class MemberController {
 
     @GetMapping("member/login")
     @ResponseBody
-    public Result login(String username, String password, HttpServletResponse res) {
+    public Result login(String username, String password, HttpServletRequest req, HttpServletResponse res) {
+        Rq rq = new Rq(req, res);
         if (username == null || username.trim().length() == 0) {
             return new Result("F-3", "username(을)를 입력해주세요.");
         }
@@ -30,8 +32,8 @@ public class MemberController {
         }
         Result result = memberService.tryLogin(username, password);
         if (result.isSuccess()) {
-            long memberId = (long)result.getData();
-            res.addCookie(new Cookie("loginedMemberId", Long.toString(memberId)));
+            long memberId = (long) result.getData();
+            rq.setCookie("loginedMemberId", memberId);
         }
         return result;
     }
@@ -39,34 +41,19 @@ public class MemberController {
     @GetMapping("member/logout")
     @ResponseBody
     public Result logout(HttpServletRequest req, HttpServletResponse res) {
-        Cookie[] cookies = req.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if(cookie.getName().equals("loginedMemberId")){
-                    cookie.setMaxAge(0);
-                    res.addCookie(cookie);
-                }
-            }
+        Rq rq = new Rq(req, res);
+        boolean isRemove = rq.removeCookie("loginedMemberId");
+        if (isRemove) {
+            return new Result("S-1", "로그아웃 되었습니다.");
         }
-        return new Result("S-1", "로그아웃 되었습니다.");
+        return new Result("F-1", "이미 로그아웃 상태입니다.");
     }
 
     @GetMapping("member/me")
     @ResponseBody
-    public Result loginState(HttpServletRequest req) {
-        long loginedMemberId = 0;
-
-        Cookie[] cookies = req.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if(cookie.getName().equals("loginedMemberId")){
-                    String value = cookie.getValue();
-                    loginedMemberId = Integer.parseInt(value);
-                    break;
-                }
-            }
-        }
-
+    public Result loginState(HttpServletRequest req, HttpServletResponse res) {
+        Rq rq = new Rq(req, res);
+        long loginedMemberId = rq.getCookieAsLong("loginedMemberId", 0);
         boolean isLogined = loginedMemberId > 0;
         if (!isLogined) {
             return new Result("F-1", "로그인 후에 이용해주세요");
