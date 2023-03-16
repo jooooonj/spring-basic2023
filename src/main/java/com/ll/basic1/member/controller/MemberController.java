@@ -4,13 +4,11 @@ import com.ll.basic1.member.entity.Member;
 import com.ll.basic1.resultData.Result;
 import com.ll.basic1.member.service.MemberService;
 import com.ll.basic1.rq.Rq;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -18,11 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class MemberController {
     private final MemberService memberService;
+    private final Rq rq;
 
     @GetMapping("member/login")
     @ResponseBody
-    public Result login(String username, String password, HttpServletRequest req, HttpServletResponse res) {
-        Rq rq = new Rq(req, res);
+    public Result login(String username, String password) {
+
         if (username == null || username.trim().length() == 0) {
             return new Result("F-3", "username(을)를 입력해주세요.");
         }
@@ -40,8 +39,7 @@ public class MemberController {
 
     @GetMapping("member/logout")
     @ResponseBody
-    public Result logout(HttpServletRequest req, HttpServletResponse res) {
-        Rq rq = new Rq(req, res);
+    public Result logout() {
         boolean isRemove = rq.removeCookie("loginedMemberId");
         if (isRemove) {
             return new Result("S-1", "로그아웃 되었습니다.");
@@ -51,8 +49,7 @@ public class MemberController {
 
     @GetMapping("member/me")
     @ResponseBody
-    public Result loginState(HttpServletRequest req, HttpServletResponse res) {
-        Rq rq = new Rq(req, res);
+    public Result loginState() {
         long loginedMemberId = rq.getCookieAsLong("loginedMemberId", 0);
         boolean isLogined = loginedMemberId > 0;
         if (!isLogined) {
