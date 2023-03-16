@@ -7,7 +7,9 @@ import com.ll.basic1.rq.Rq;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -17,7 +19,7 @@ public class MemberController {
     private final MemberService memberService;
     private final Rq rq;
 
-    @GetMapping("member/login")
+    @PostMapping("member/login")
     @ResponseBody
     public Result login(String username, String password) {
 
@@ -36,6 +38,11 @@ public class MemberController {
         return result;
     }
 
+    @GetMapping("/member/login")
+    public String showLogin(){
+        return "usr/member/login";
+    }
+
     @GetMapping("member/logout")
     @ResponseBody
     public Result logout() {
@@ -47,20 +54,15 @@ public class MemberController {
     }
 
     @GetMapping("member/me")
-    @ResponseBody
-    public Result loginState() {
+    public String showMe(Model model) {
         long loginedMemberId = rq.getSessionAsLong("loginedMemberId", 0);
-        boolean isLogined = loginedMemberId > 0;
-        if (!isLogined) {
-            return new Result("F-1", "로그인 후에 이용해주세요");
-        }
-        Member member = memberService.findById(loginedMemberId);
-        return new Result("S-1", "당신의 username(은)는 %s 입니다.".formatted(member.getUsername()));
+
+        Member findMember = memberService.findById(loginedMemberId);
+        model.addAttribute("member", findMember);
+
+        return "usr/member/me";
     }
 
-    @GetMapping("/member/loginPage")
-    public String showLogin(){
-        return "usr/member/login";
-    }
+
 }
 
