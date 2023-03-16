@@ -103,7 +103,16 @@ public class Rq {
             req.getSession().removeAttribute(name);
             isRemove = true;
         }
-
         return isRemove;
     }
+
+   public boolean isLogined(){
+       long loginedMemberId = getSessionAsLong("loginedMemberId", 0);
+
+       return loginedMemberId > 0;
+   }
+
+   public boolean isLogouted(){
+        return !isLogined();
+   }
 }

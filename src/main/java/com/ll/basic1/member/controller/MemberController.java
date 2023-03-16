@@ -4,15 +4,14 @@ import com.ll.basic1.member.entity.Member;
 import com.ll.basic1.resultData.Result;
 import com.ll.basic1.member.service.MemberService;
 import com.ll.basic1.rq.Rq;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Controller
 public class MemberController {
     private final MemberService memberService;
@@ -55,11 +54,13 @@ public class MemberController {
         if (!isLogined) {
             return new Result("F-1", "로그인 후에 이용해주세요");
         }
-
         Member member = memberService.findById(loginedMemberId);
         return new Result("S-1", "당신의 username(은)는 %s 입니다.".formatted(member.getUsername()));
     }
 
-
+    @GetMapping("/member/loginPage")
+    public String showLogin(){
+        return "usr/member/login";
+    }
 }
 
