@@ -7,6 +7,7 @@ import lombok.Getter;
 public class Member {
     private static long num;
     private long id;
+    private String userId;
     private String username;
     private String password;
 
@@ -14,7 +15,7 @@ public class Member {
         num = 0;
     }
 
-    public Member(String username, String password) {
-        this(++num, username, password);
+    public Member(String userId, String username, String password) {
+        this(++num,userId, username, password);
     }
 }

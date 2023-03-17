@@ -108,7 +108,6 @@ public class Rq {
 
    public boolean isLogined(){
        long loginedMemberId = getSessionAsLong("loginedMemberId", 0);
-
        return loginedMemberId > 0;
    }
 

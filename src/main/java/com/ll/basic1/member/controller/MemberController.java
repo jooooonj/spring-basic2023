@@ -57,6 +57,7 @@ public class MemberController {
     public String showMe(Model model) {
         long loginedMemberId = rq.getSessionAsLong("loginedMemberId", 0);
 
+
         Member findMember = memberService.findById(loginedMemberId);
         model.addAttribute("member", findMember);
 
