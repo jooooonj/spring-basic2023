@@ -2,14 +2,18 @@ package com.ll.basic1.article.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 import static jakarta.persistence.GenerationType.*;
 
 @Entity
+@Builder
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Article {
     @Id
     @GeneratedValue(strategy = IDENTITY)
