@@ -8,6 +8,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+      show-sql: true
+      format_sql: true;
   resources:
     add-mappings=false:

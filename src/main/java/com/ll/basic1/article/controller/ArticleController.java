@@ -21,8 +21,17 @@ public class ArticleController {
     @GetMapping("/write")
     @ResponseBody
     public Result write(String title, String body) {
-        Article article = articleService.getArticle(title, body);
-        articleService.save(article);
-        return new Result("S-1", "1번 글이 생성되었습니다.", article);
+
+        if (title == null || title.trim().length() == 0) {
+            return new Result("F-1", "title(을)를 입력해주세요.");
+        }
+
+        if (body == null || body.trim().length() == 0) {
+            return new Result("F-2", "body(을)를 입력해주세요.");
+        }
+
+        Article createdArticle = articleService.save(title, body);
+
+        return new Result("S-1", "1번 글이 생성되었습니다.", createdArticle);
     }
 }

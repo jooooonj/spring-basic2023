@@ -5,22 +5,20 @@ import com.ll.basic1.article.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
 public class ArticleService {
     private final ArticleRepository articleRepository;
-    public void save(Article article) {
-        articleRepository.save(article);
-    }
-
-    public Article getArticle(String title, String body) {
-        return Article.builder()
-                .createDate(LocalDateTime.now())
-                .modifyDate(LocalDateTime.now())
+    public Article save(String title, String body) {
+        Article article = Article
+                .builder()
                 .title(title)
                 .body(body)
                 .build();
+        articleRepository.save(article);
+        return article;
     }
+
+
 }
