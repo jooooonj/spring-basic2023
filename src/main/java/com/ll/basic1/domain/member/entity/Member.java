@@ -1,25 +1,21 @@
-package com.ll.basic1.article.entity;
-
+package com.ll.basic1.domain.member.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
+import org.springframework.data.auditing.config.AuditingConfiguration;
 import java.time.LocalDateTime;
-
-import static jakarta.persistence.GenerationType.*;
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Builder
-@Getter
 @NoArgsConstructor
-@AllArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
-public class Article {
+@Getter
+@EntityListeners(AuditingConfiguration.class)
+public class Member {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private long id;
@@ -27,6 +23,6 @@ public class Article {
     private LocalDateTime createDate;
     @LastModifiedDate
     private LocalDateTime modifyDate;
-    private String title;
-    private String body;
+    private String username;
+    private String password;
 }

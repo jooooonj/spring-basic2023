@@ -1,8 +1,8 @@
-package com.ll.basic1.member.service;
+package com.ll.basic1.domain.member.service;
 
-import com.ll.basic1.member.entity.Member;
-import com.ll.basic1.member.repository.MemberRepository;
-import com.ll.basic1.resultData.Result;
+import com.ll.basic1.domain.member.entity.Member;
+import com.ll.basic1.domain.member.repository.MemberRepository;
+import com.ll.basic1.shared.resultData.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

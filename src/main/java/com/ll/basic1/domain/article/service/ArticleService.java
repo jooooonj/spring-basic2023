@@ -1,9 +1,11 @@
-package com.ll.basic1.article.service;
+package com.ll.basic1.domain.article.service;
 
-import com.ll.basic1.article.entity.Article;
-import com.ll.basic1.article.repository.ArticleRepository;
+import com.ll.basic1.domain.article.entity.Article;
+import com.ll.basic1.domain.article.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 
 @Service
@@ -16,6 +18,7 @@ public class ArticleService {
                 .title(title)
                 .body(body)
                 .build();
+
         articleRepository.save(article);
         return article;
     }

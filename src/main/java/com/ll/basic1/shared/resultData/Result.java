@@ -1,4 +1,4 @@
-package com.ll.basic1.resultData;
+package com.ll.basic1.shared.resultData;
 
 import lombok.Getter;
 @Getter

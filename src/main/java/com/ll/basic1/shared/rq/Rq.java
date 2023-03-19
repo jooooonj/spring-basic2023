@@ -1,10 +1,8 @@
-package com.ll.basic1.rq;
+package com.ll.basic1.shared.rq;
 
-import com.ll.basic1.resultData.Result;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;

@@ -1,11 +1,10 @@
-package com.ll.basic1.member.controller;
+package com.ll.basic1.domain.member.controller;
 
-import com.ll.basic1.member.entity.Member;
-import com.ll.basic1.resultData.Result;
-import com.ll.basic1.member.service.MemberService;
-import com.ll.basic1.rq.Rq;
+import com.ll.basic1.domain.member.entity.Member;
+import com.ll.basic1.domain.member.service.MemberService;
+import com.ll.basic1.shared.resultData.Result;
+import com.ll.basic1.shared.rq.Rq;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,5 +1,5 @@
-package com.ll.basic1.member.repository;
-import com.ll.basic1.member.entity.Member;
+package com.ll.basic1.domain.member.repository;
+import com.ll.basic1.domain.member.entity.Member;
 import lombok.Getter;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
