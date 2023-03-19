@@ -6,13 +6,15 @@ import com.ll.basic1.shared.resultData.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
 
     public Result tryLogin(String username, String password) {
-        Member findMember = memberRepository.findByUsername(username);
+        Member findMember = getMember(username);
 
         if (findMember == null) {
             return new Result("F-1", "%s(은)는 존재하지 않는 회원입니다.".formatted(username));
@@ -25,7 +27,27 @@ public class MemberService {
         return new Result("S-1", "%s 님 환영합니다.".formatted(username), findMember.getId());
     }
 
-    public Member findById(long loginedMemberId) {
-        return memberRepository.findById(loginedMemberId);
+    public Member getMember(long id) {
+        return memberRepository.findById(id).orElse(null);
+    }
+    public Member getMember(String username) {
+        return memberRepository.findByUsername(username).orElse(null);
+    }
+
+    public Member addMember(String username, String password) {
+        Member newMember = Member.builder()
+                .username(username)
+                .password(password)
+                .build();
+        return memberRepository.save(newMember);
+    }
+
+    public Member updateMember(String username, String password) {
+       Member findMember = memberRepository.findByUsername(username).orElse(null);
+
+       if(findMember!=null)
+        findMember.updateMe(password);
+
+        return memberRepository.save(findMember);
     }
 }

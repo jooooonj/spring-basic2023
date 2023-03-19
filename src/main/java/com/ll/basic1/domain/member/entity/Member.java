@@ -1,8 +1,9 @@
 package com.ll.basic1.domain.member.entity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.databind.ser.Serializers;
+import com.ll.basic1.shared.baseEntity.BaseEntity;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,15 +15,17 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Entity
 @NoArgsConstructor
 @Getter
-@EntityListeners(AuditingConfiguration.class)
-public class Member {
+@Builder
+@AllArgsConstructor
+public class Member extends BaseEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private long id;
-    @CreatedDate
-    private LocalDateTime createDate;
-    @LastModifiedDate
-    private LocalDateTime modifyDate;
+    @Column(unique = true)
     private String username;
     private String password;
+
+    public void updateMe(String password) {
+        this.password = password;
+    }
 }
