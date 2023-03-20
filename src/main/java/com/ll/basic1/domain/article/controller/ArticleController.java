@@ -26,7 +26,7 @@ public class ArticleController {
             return new Result("F-2", "body(을)를 입력해주세요.");
         }
 
-        Article article = articleService.save(title, body);
+        Article article = articleService.write(title, body);
 
         return new Result("S-1", "1번 글이 생성되었습니다.", article);
     }

@@ -1,15 +1,11 @@
 package com.ll.basic1.domain.member.entity;
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.ll.basic1.shared.baseEntity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.auditing.config.AuditingConfiguration;
-import java.time.LocalDateTime;
+
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity

@@ -6,8 +6,6 @@ import com.ll.basic1.shared.resultData.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -34,7 +32,7 @@ public class MemberService {
         return memberRepository.findByUsername(username).orElse(null);
     }
 
-    public Member addMember(String username, String password) {
+    public Member join(String username, String password) {
         Member newMember = Member.builder()
                 .username(username)
                 .password(password)

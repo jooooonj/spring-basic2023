@@ -77,7 +77,7 @@ public class MemberController {
             return new Result("F-4", "패스워드(을)를 입력해주세요.");
         }
 
-        Member member = memberService.addMember(username, password);
+        Member member = memberService.join(username, password);
         return new Result("S-1", member.getUsername() + "님 환영합니다.");
     }
 
